@@ -1,0 +1,27 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq/
+      - rabbitmq_log:/var/log/rabbitmq/
+
+  app_sender:
+    build:
+      context: .
+      target: app_sender
+    depends_on:
+      - rabbitmq
+
+  app_receiver:
+    build:
+      context: .
+      target: app_receiver
+    depends_on:
+      - app_sender
+
+volumes:
+  rabbitmq_data:
+  rabbitmq_log:
