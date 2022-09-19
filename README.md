@@ -1,5 +1,3 @@
-# RabbitMQ-demo
-
 ## Elements of demo
 The demo consists of 4 elements:
 1) Message sender (go app)
